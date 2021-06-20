@@ -1,2 +1,2 @@
 # external_keyboard_hotkeys
-Homemade Stream Deck 
+Keybinds for numberpad instead of purchasing the $150 Elgato Stream deck.
