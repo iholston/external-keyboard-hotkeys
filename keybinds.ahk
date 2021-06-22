@@ -2,25 +2,23 @@
 #SingleInstance Force ; Skips the dialog box and replaces the old instance automatically.
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
+#InstallKeybdHook
+
+; Paths. Mostly copied out of shortcut menus' target fields.
+subscripts = %A_ScriptDir%\subscripts
+mspaint = C:\Windows\system32\mspaint.exe
+discord = "C:\Users\Isaac Holston\AppData\Local\Discord\Update.exe" --processStart Discord.exe
+valorant = "C:\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=valorant --launch-patchline=live
+league = "C:\Riot Games\League of Legends\LeagueClient.exe"
+battlenet = "L:\Games\Battle.net\Battle.net.exe"
 
 
 ; Test Key
 ^q::
-process, close, wallpaper32.exe
+run %mspaint%
 MsgBox exiting
 ExitApp
 return
-
-; Paths
-subscripts = %A_ScriptDir%\subscripts
-mspaint = C:\Windows\system32\mspaint.exe
-
-; Commands. Mostly copied out of shortcut menus' target fields.
-open_discord = "C:\Users\Isaac Holston\AppData\Local\Discord\Update.exe" --processStart Discord.exe
-open_val = "C:\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=valorant --launch-patchline=live
-open_league = "C:\Riot Games\League of Legends\LeagueClient.exe"
-open_battlenet = "L:\Games\Battle.net\Battle.net.exe"
-
 
 ;----------------------------------------------------------------------------------------
 ; Key 0x0 - Regular Esc Button
@@ -73,4 +71,69 @@ return
 ; Key 1x3 - Opens Battle.net client
 ^f::
 Run %open_battlenet%
+return
+
+
+; Key 4x0 - NumpadEnd: Opens/Closes Discord.
+numpadend::
+if winexist("ahk_exe Discord.exe")
+{
+  msgbox, 1, Discord, Close Discord?, 60
+  ifmsgbox, ok
+    winclose
+}
+else
+  run %discord%
+return
+
+; Key 4x1 - NumpadDown: Toggles discord mute.
+numpaddown::
+if winexist("ahk_exe Discord.exe")
+{
+  blockinput, on
+  winactivate, ahk_exe Discord.exe
+  send ^+m
+  blockinput, off
+}
+return
+
+; Key 4x2 - NumpadPgDn: Toggles discord deafen
+numpaddown::
+if winexist("ahk_exe Discord.exe")
+{
+  blockinput, on
+  winactivate, ahk_exe Discord.exe
+  send ^+d
+  blockinput, off
+}
+return
+
+; Key (5x0, 5x1) - NumpadIns: Activates nvidia shadowplay by sending alt-f10.
+numpadins::
+send !{f10}
+return
+
+; Key 5x2 - NumpadDel: Runs a python script that finds that latest video with current date in video folder and deletes it.
+numpaddel::
+run %subscripts%\delete_latest_video.py
+return
+
+; Key (4x4, 5x4) - NumpadEnter: Screenshots the screen, opens mspaint, and pastes it.
+numpadenter::
+critical, on
+blockinput, on
+send {printscreen}
+blockinput, off
+sleep 500
+run %mspaint%
+blockinput, On
+winwait, Paint ahk_class MSPaintApp, , 5
+if errorlevel
+{
+  msgBox winwait for mspaint timed out.
+  return
+}
+winactivate, ahk_class MSPaintApp
+send ^v
+blockinput, off
 return
