@@ -4,13 +4,14 @@ SendMode Input ; Recommended for new scripts due to its superior speed and relia
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 #InstallKeybdHook
 
-; Paths. Mostly copied out of shortcut menus' target fields. 
+; Paths. Mostly copied out of shortcut menus' target fields.
 subscripts = %A_ScriptDir%\subscripts
 mspaint = C:\Windows\system32\mspaint.exe
 discord = "C:\Users\Isaac Holston\AppData\Local\Discord\Update.exe" --processStart Discord.exe
 valorant = "C:\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=valorant --launch-patchline=live
 league = "C:\Riot Games\League of Legends\LeagueClient.exe"
 battlenet = "L:\Games\Battle.net\Battle.net.exe"
+cmd = "C:\Windows\System32\cmd.exe"
 
 
 ;----------------------------------------------------------------------------------------
@@ -46,6 +47,29 @@ else
 return
 
 ; Key 1x3 - Backspace. Default backspace
+
+; Key 2x0 - NumpadHome: Sleeps Computer
+numpadhome::
+command = rundll32.exe powrprof.dll,SetSuspendState 0,1,0
+msgbox, 1, Sleep, Sleep computer?, 60
+if msgbox, ok
+  run %cmd% /c %command%
+return
+
+; Key 2x1 - Numpadup: Toggle Mute
+numpadup::
+send {volume_mute}
+return
+
+; Key 2x2 - NumpadPgUp: Volume down
+numpadpgup::
+send {volume_down}
+return
+
+; Key 2x3 - NumpadSub: Volume Up
+numpadsub::
+send {volume_up}
+return
 
 ; Key 4x0 - NumpadEnd: Opens/Closes Discord.
 numpadend::
