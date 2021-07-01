@@ -7,7 +7,7 @@ Row 1: \[\_\]\[\_\]\[\_\]\[\_\]
 Row 2: \[\_\]\[\_\]\[\_\]\[\_\]  
 Row 3: \[\_\]\[\_\]\[\_\]\[\_\]  
 Row 4: \[\_\]\[\_\]\[\_\]|&nbsp;&nbsp;|   
-Row 5: \[\_\_\_\_\]\[\_\]|\_| 
+Row 5: &nbsp;\[\_\_\_\_\]\[\_\]|\_| 
 
 Paths are mostly copied out of shortcut menus' target fields.
 Add script shortcut to windows startup folder. Win+R -> shell:startup
