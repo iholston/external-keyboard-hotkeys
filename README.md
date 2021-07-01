@@ -16,7 +16,7 @@ Row 1: [_][_][_][_]
 Row 2: [_][_][_][ |
 Row 3: [_][_][_][_|
 Row 4: [_][_][_]| | 
-Row 5: [____][_]|_| 
+Row 5: [_&nbsp_][_]|_| 
 --->
 
 Paths are mostly copied out of shortcut menus' target fields.
