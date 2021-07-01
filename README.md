@@ -1,7 +1,7 @@
 # external_keyboard_hotkeys
 Autohotkey keybind script for external numberpad in lieu of purchasing an expensive stream deck.
 
-Column: 0  1  2  3  
+Column: 0 &thinsp; 1 &thinsp; 2  3  
 Row 0:&ensp; \[\_\]\[\_\]\[\_\]\[\_\]   
 Row 1:&ensp; \[\_\]\[\_\]\[\_\]\[\_\]  
 Row 2:&ensp; \[\_\]\[\_\]\[\_\]\[\_\]  
