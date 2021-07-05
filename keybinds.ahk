@@ -50,51 +50,52 @@ else
 return
 
 ; Key 1x3 - Backspace. Default backspace
-; Key 2x0 - NumpadHome: Sleeps Computer
+
+; Key 2x0 - NumpadHome: Pulls up last replay in video folder
 numpadhome::
+run %pyscripts%\playlatestreplay.pyw
+return
+
+; Key 2x1 - Numpadup: Deletes last replay in video folder
+numpadup::
+msgbox, 1, Delete Video, Delete latest video?, 3
+ifmsgbox, ok
+  run %pyscripts%\deletelatestreplay.pyw
+return
+
+; Key 2x2 - NumpadPgUp: Open file location of last replay
+numpadpgup::
+run %pyscripts%\olrfl.pyw
+return
+
+; Key 2x3 - NumpadSub: Opens webbrowser to url for mp4 compression
+numpadsub::
+msgbox, 1, Compress/Move Video, Compress and move latest video?, 3
+ifmsgbox, ok
+  run %pyscripts%\compressandmovelr.pyw
+return
+
+; Key 3x0 - NumpadLeft: Sleeps Computer
+numpadleft::
 command = rundll32.exe powrprof.dll,SetSuspendState 0,1,0
 msgbox, 1, Sleep, Sleep computer?, 3
 if msgbox, ok
   run %cmd% /c %command%
 return
 
-; Key 2x1 - Numpadup: Toggle Mute
-numpadup::
+; Key 3x1 - NumpadClear: Toggle Mute
+numpadclear::
 send {volume_mute}
 return
 
-; Key 2x2 - NumpadPgUp: Volume down
-numpadpgup::
+; Key 3x2 - NumpadRight: Volume down
+numpadright::
 send {volume_down}
 return
 
-; Key 2x3 - NumpadSub: Volume Up
-numpadsub::
-send {volume_up}
-return
-
-; Key 3x0 - NumpadLeft: Pulls up last replay in video folder
-numpadleft::
-run %pyscripts%\playlatestreplay.pyw
-return
-
-; Key 3x1 - NumpadClear: Deletes last replay in video folder
-numpadclear::
-msgbox, 1, Delete Video, Delete latest video?, 3
-ifmsgbox, ok
-  run %pyscripts%\deletelatestreplay.pyw
-return
-
-; Key 3x2 - NumpadRight: Open file location of last replay
-numpadright::
-run %pyscripts%\olrfl.pyw
-return
-
-; Key 3x3 - NumpadAdd: Opens webbrowser to url for mp4 compression
+; Key 3x3 - NumpadAdd: Volume Up
 numpadadd::
-msgbox, 1, Compress/Move Video, Compress and move latest video?, 3
-ifmsgbox, ok
-  run %pyscripts%\compressandmovelr.pyw
+send {volume_up}
 return
 
 ; Key 4x0 - NumpadEnd: Opens/Closes Discord.
