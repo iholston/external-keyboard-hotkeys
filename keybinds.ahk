@@ -51,23 +51,20 @@ return
 
 ; Key 1x3 - Backspace. Default backspace
 
-; Key 2x0 - NumpadHome, Numpad7: Pulls up last replay in video folder
+; Key 2x0 - NumpadHome: Pulls up last replay in video folder
 numpadhome::
-numpad7::
 run %pyscripts%\playlatestreplay.pyw
 return
 
-; Key 2x1 - Numpadup, Numpad8: Deletes last replay in video folder
+; Key 2x1 - Numpadup: Deletes last replay in video folder
 numpadup::
-Numpad8::
 msgbox, 1, Delete Video, Delete latest video?, 3
 ifmsgbox, ok
   run %pyscripts%\deletelatestreplay.pyw
 return
 
-; Key 2x2 - NumpadPgUp, Numpad9: Open file location of last replay
+; Key 2x2 - NumpadPgUp: Open file location of last replay
 numpadpgup::
-numpad9::
 run %pyscripts%\olrfl.pyw
 return
 
@@ -78,24 +75,21 @@ ifmsgbox, ok
   run %pyscripts%\compressandmovelr.pyw
 return
 
-; Key 3x0 - NumpadLeft, Numpad4: Sleeps Computer
+; Key 3x0 - NumpadLeft: Sleeps Computer
 numpadleft::
-numpad4::
 command = rundll32.exe powrprof.dll,SetSuspendState 0,1,0
 msgbox, 1, Sleep, Sleep computer?, 3
 if msgbox, ok
   run %cmd% /c %command%
 return
 
-; Key 3x1 - NumpadClear, Numpad5: Toggle Mute
+; Key 3x1 - NumpadClear: Toggle Mute
 numpadclear::
-numpad5::
 send {volume_mute}
 return
 
-; Key 3x2 - NumpadRight, Numpad6: Volume down
+; Key 3x2 - NumpadRight: Volume down
 numpadright::
-numpad6::
 send {volume_down}
 return
 
@@ -104,9 +98,8 @@ numpadadd::
 send {volume_up}
 return
 
-; Key 4x0 - NumpadEnd, Numpad1: Opens/Closes Discord.
+; Key 4x0 - NumpadEnd: Opens/Closes Discord.
 numpadend::
-numpad1::
 if winexist("ahk_exe Discord.exe")
 {
   msgbox, 1, Discord, Close Discord?, 3
@@ -117,9 +110,8 @@ else
   run %discord%
 return
 
-; Key 4x1 - NumpadDown, Numpad2: Toggles discord mute.
+; Key 4x1 - NumpadDown: Toggles discord mute.
 numpaddown::
-numpad2::
 if winexist("ahk_exe Discord.exe")
 {
   blockinput, on
@@ -129,9 +121,8 @@ if winexist("ahk_exe Discord.exe")
 }
 return
 
-; Key 4x2 - NumpadPgDn, Numpad3: Toggles discord deafen
+; Key 4x2 - NumpadPgDn: Toggles discord deafen
 numpadpgdn::
-numpad3::
 if winexist("ahk_exe Discord.exe")
 {
   blockinput, on
@@ -141,15 +132,13 @@ if winexist("ahk_exe Discord.exe")
 }
 return
 
-; Key (5x0, 5x1) - NumpadIns, Numpad0: Activates nvidia shadowplay by sending alt-f10.
+; Key (5x0, 5x1) - NumpadIns: Activates nvidia shadowplay by sending alt-f10.
 numpadins::
-numpad0::
 send !{f10}
 return
 
-; Key 5x2 - NumpadDel, NumpadDot: Screenshots the screen, opens mspaint, and pastes it.
+; Key 5x2 - NumpadDel: Screenshots the screen, opens mspaint, and pastes it.
 numpaddel::
-numpaddot::
 critical, on
 blockinput, on
 send {printscreen}
@@ -169,3 +158,19 @@ blockinput, off
 return
 
 ; Key (4x4, 5x4) - NumpadEnter: Used to answer msgbox popups. Will eventually use it to add more buttons ie numpadenter + numpadup
+
+; The numlocked versions of these keys Numpad1-9 do not work consistently because games and other apps will take them as input instead of autohotkey
+; i have no idea why. So I just have them output a message stating to turn off numlock.
+numpad1::
+numpad2::
+numpad3::
+numpad4::
+numpad5::
+numpad6::
+numpad7::
+numpad8::
+numpad9::
+numpad0::
+numpaddot::
+msgbox, 1, NUMLOCK ON, TURN OFF NUMLOCK THANKS TEAM, 3
+return
