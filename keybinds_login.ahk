@@ -12,18 +12,20 @@
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 pyscripts = %A_ScriptDir%\pyscripts
+loginPath = %A_ScriptDir%\config\login.txt
+soundMute = "C:\Program Files\SoundVolumeView.exe"
 mspaint = "C:\Windows\system32\mspaint.exe"
-discord = "C:\Users\Isaac Holston\AppData\Local\Discord\Update.exe" --processStart Discord.exe
 valorant = "C:\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=valorant --launch-patchline=live
 league = "C:\Riot Games\League of Legends\LeagueClient.exe"
 battlenet = "L:\Games\Battle.net\Battle.net.exe"
 cmd = "C:\Windows\System32\cmd.exe"
 
-; Row 0  => Keys on row 0 are still default numberpad keys.
+; Row 0 => Default numpad keys
 
-; Row 1  => Opens league and valorant
+; Row 1 => Open league of legends and Valorant
 ; Key 1x0 - Numlock: This key has not changed. Should be off though for this script to work.
-; Key 1x1 - NumpadDiv: Opens league of legends
+
+; Key 1x1 - NumpadDiv => Opens league of legends
 numpaddiv::
 if winexist("ahk_exe LeagueClientUx.exe")
 {
@@ -51,68 +53,60 @@ else
   run %valorant%
 return
 
-; Key 1x3 - Backspace. Default backspace
+; Key 1x3 - Backspace => Default backspace
 
-; Row 2  => Video manipulation
-; Key 2x0 - NumpadHome => Pulls up last replay in video folder
+; ROW 2 => Logins.
+; Key 2x0 - NumpadHome => Login #1
 numpadhome::
+Run, %pyscripts%\login.pyw %loginPath% 1, ; %loginPath% gets passed as 2 parameters because I have a space in the directory name...
+return
+
+; Key 2x1 - Numpadup => Login #2
+numpadup::
+Run, %pyscripts%\login.pyw %loginPath% 2,
+return
+
+; Key 2x2 - NumpadPgUp => Login #3
+numpadpgup::
+Run, %pyscripts%\login.pyw %loginPath% 3,
+return
+
+; Key 2x3 - NumpadSub => Login #4
+numpadsub::
+Run, %pyscripts%\login.pyw %loginPath% 4,
+return
+
+; Key 3x0 - NumpadLeft => Pulls up lastest video in video folder
+numpadleft::
 run %pyscripts%\playlatestreplay.pyw
 return
 
-; Key 2x1 - Numpadup: Deletes last replay in video folder
-numpadup::
+; Key 3x1 - NumpadClear => Deletes last replay in video folder
+numpadclear::
 msgbox, 1, Delete Video, Delete latest video?, 3
 ifmsgbox, ok
   run %pyscripts%\deletelatestreplay.pyw
 return
 
-; Key 2x2 - NumpadPgUp: Open file location of last replay
-numpadpgup::
+; Key 3x2 - NumpadRight => Open file location of last replay
+numpadright::
 run %pyscripts%\olrfl.pyw
 return
 
-; Key 2x3 - NumpadSub: Opens webbrowser to url for mp4 compression
-numpadsub::
-msgbox, 1, Compress/Move Video, Compress and move latest video?, 3
+; Key 3x3 - NumpadAdd => Opens webbrowser to url for mp4 compression
+numpadadd::
+msgbox, 1, Open webbrowser for compression?, 3
 ifmsgbox, ok
   run %pyscripts%\compressandmovelr.pyw
 return
 
-; Row 3  => Basic computer functions
-; Key 3x0 - NumpadLeft: Sleeps Computer
-numpadleft::
-command = rundll32.exe powrprof.dll,SetSuspendState 0,1,0
-msgbox, 1, Sleep, Sleep computer?, 3
-if msgbox, ok
-  run %cmd% /c %command%
-return
-
-; Key 3x1 - NumpadClear: Toggle Mute
-numpadclear::
-send {volume_mute}
-return
-
-; Key 3x2 - NumpadRight: Volume down
-numpadright::
-send {volume_down}
-return
-
-; Key 3x3 - NumpadAdd: Volume Up
-numpadadd::
-send {volume_up}
-return
-
-; Row 4 => Discord
-; Key 4x0 - NumpadEnd: Opens/Closes Discord.
+; Key 4x0 - NumpadEnd: Toggles Mic mute via soundvolumeview since my mic does not have mute button
 numpadend::
-if winexist("ahk_exe Discord.exe")
-{
-  msgbox, 1, Discord, Close Discord?, 3
-  ifmsgbox, ok
-    winclose
-}
-else
-  run %discord%
+Run, %soundMute% /Switch "{0.0.1.00000000}.{4c0c1999-4145-4005-96dc-ae8ef6e667a2}",
+msgbox, 1, MIC MUTED, Click OK to open soundviewer`nMic will UNMUTE when this window is closed,
+ifmsgbox, ok
+  Run %soundMute%
+Run, %soundMute% /Switch "{0.0.1.00000000}.{4c0c1999-4145-4005-96dc-ae8ef6e667a2}",
 return
 
 ; Key 4x1 - NumpadDown: Toggles discord mute.
@@ -137,7 +131,8 @@ if winexist("ahk_exe Discord.exe")
 }
 return
 
-; Row 5 => Recording stuff
+; Key 4x3 - Upper half of enter => see Key 5x3
+
 ; Key (5x0, 5x1) - NumpadIns: Activates nvidia shadowplay by sending alt-f10.
 numpadins::
 send !{f10}
@@ -163,7 +158,7 @@ send ^v
 blockinput, off
 return
 
-; Key (4x4, 5x4) - NumpadEnter: Used to answer msgbox popups. Will eventually use it to add more buttons ie numpadenter + numpadup
+; Key (4x3, 5x3) - NumpadEnter: Used to answer msgbox popups. Will eventually use it to add more buttons ie numpadenter + numpadup
 
 ; The numlocked versions of these keys Numpad1-9 do not work consistently because games and other apps will take them as input instead of autohotkey
 ; i have no idea why. So I just have them output a message stating to turn off numlock.

@@ -11,3 +11,6 @@ Row 5: [____][_]|_|
 Paths are mostly copied out of shortcut menus' target fields.  
 Add script shortcut to windows startup folder. Win+R -> shell:startup  
 File locations within the pyscripts are hardcoded.  
+
+keybinds.ahk => my original script
+keybinds_login.ahk => a script that takes login info and will manually enter it into riot client. I have 100s of accounts that change regularly hehe
