@@ -12,7 +12,7 @@
 SendMode Input ; Recommended for new scripts due to its superior speed and reliability.
 SetWorkingDir %A_ScriptDir% ; Ensures a consistent starting directory.
 pyscripts = %A_ScriptDir%\pyscripts
-loginPath = %A_ScriptDir%\config\login.txt ; unencrypted because i do not care
+loginPath = %A_ScriptDir%\config\login.txt ; unencrypted because i do not care lul
 soundMute = "C:\Program Files\SoundVolumeView.exe"
 mspaint = "C:\Windows\system32\mspaint.exe"
 valorant = "C:\Riot Games\Riot Client\RiotClientServices.exe" --launch-product=valorant --launch-patchline=live
