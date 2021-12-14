@@ -102,11 +102,11 @@ return
 
 ; Key 4x0 - NumpadEnd: Toggles Mic mute via soundvolumeview since my mic does not have mute button
 numpadend::
-Run, %soundMute% /Switch "{0.0.1.00000000}.{4c0c1999-4145-4005-96dc-ae8ef6e667a2}",
+Run, %soundMute% /Switch "{0.0.1.00000000}.{2a8b5175-7321-4ac0-9155-1703103f8ee8}",
 msgbox, 1, MIC MUTED, Click OK to open soundviewer`nMic will UNMUTE when this window is closed,
 ifmsgbox, ok
   Run %soundMute%
-Run, %soundMute% /Switch "{0.0.1.00000000}.{4c0c1999-4145-4005-96dc-ae8ef6e667a2}",
+Run, %soundMute%  /Switch "{0.0.1.00000000}.{2a8b5175-7321-4ac0-9155-1703103f8ee8}",
 return
 
 ; Key 4x1 - NumpadDown: Toggles discord mute.
